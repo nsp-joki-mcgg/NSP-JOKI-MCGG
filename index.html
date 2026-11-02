@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#100b1d">
+<title>NSP JOKI — Magic Chess: Go Go</title>
+<style>
+:root{--bg:#0b0812;--panel:#171126;--panel2:#211735;--purple:#a879ff;--pink:#e58cff;--text:#f7f1ff;--muted:#b9accb;--line:#39284f;--green:#70e6ad}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 80% 0%,#34204d 0,transparent 35%),var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+a{color:inherit;text-decoration:none}.wrap{width:min(1100px,92%);margin:auto}
+header{position:sticky;top:0;z-index:5;background:#0d0915df;backdrop-filter:blur(14px);border-bottom:1px solid #ffffff12}
+.nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{font-weight:950;letter-spacing:1.5px;font-size:1.2rem}.brand b{color:var(--purple)}.navlinks{display:flex;gap:22px;color:var(--muted);font-size:.92rem}.navlinks a:hover{color:white}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 18px;border-radius:12px;border:1px solid #ffffff20;background:linear-gradient(120deg,#9b65f5,#c47bff);color:#160d25;font-weight:850;cursor:pointer;box-shadow:0 8px 28px #a879ff30}.btn.secondary{background:#ffffff0a;color:var(--text);box-shadow:none;border-color:var(--line)}
+.hero{padding:76px 0 58px;display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:38px}.eyebrow{display:inline-flex;gap:8px;align-items:center;padding:7px 11px;border:1px solid #a879ff55;background:#a879ff14;color:#d9c4ff;border-radius:99px;font-size:.78rem;font-weight:800;letter-spacing:1px}.dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green)}
+h1{font-size:clamp(2.6rem,7vw,5.3rem);line-height:.98;letter-spacing:-3px;margin:20px 0 16px}.gradient{background:linear-gradient(90deg,#fff,#c9a4ff 55%,#f0a6ff);-webkit-background-clip:text;background-clip:text;color:transparent}.hero p{color:var(--muted);line-height:1.75;max-width:560px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}.visual{min-height:340px;border-radius:28px;border:1px solid #ffffff20;background:linear-gradient(145deg,#2b1941,#130e20 62%);position:relative;overflow:hidden;display:grid;place-items:center;box-shadow:0 25px 80px #0008}.visual:before,.visual:after{content:"";position:absolute;border-radius:50%;filter:blur(2px)}.visual:before{width:260px;height:260px;background:#a879ff30;top:-80px;right:-40px}.visual:after{width:200px;height:200px;background:#e58cff20;bottom:-80px;left:-40px}.chess{position:relative;z-index:1;width:230px;height:230px;display:grid;grid-template-columns:repeat(4,1fr);gap:7px;transform:rotate(-8deg);filter:drop-shadow(0 20px 20px #0008)}.tile{border-radius:12px;background:linear-gradient(145deg,#d7b5ff,#8054bd);border:1px solid #f5eaff70;display:grid;place-items:center;font-size:2rem;color:#29163e}.tile:nth-child(2n){background:linear-gradient(145deg,#3a2853,#1b1428);color:#d9b9ff}.visual-label{position:absolute;z-index:2;bottom:22px;text-align:center;font-weight:900;letter-spacing:3px;color:#e4d2ff;font-size:.8rem}
+section{padding:54px 0}.section-head{text-align:center;margin-bottom:28px}.section-head h2{font-size:clamp(1.8rem,4vw,2.6rem);margin:0 0 10px}.section-head p{color:var(--muted);margin:0}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{background:linear-gradient(160deg,#1d1530,#120e1c);border:1px solid var(--line);padding:23px;border-radius:18px}.icon{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:#a879ff20;color:#d6baff;font-size:1.35rem}.card h3{margin:17px 0 8px}.card p{margin:0;color:var(--muted);line-height:1.65;font-size:.94rem}
+.price-note{margin-top:18px;padding:17px;border:1px dashed #8f69c5;border-radius:14px;color:#d8c8ec;text-align:center;background:#a879ff0b}
+.order-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:20px;align-items:start}.info-panel,.form-panel{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:24px}.info-panel h3,.form-panel h3{margin-top:0}.info-panel p,.fine{color:var(--muted);line-height:1.65}.steps{padding:0;list-style:none;display:grid;gap:15px}.steps li{display:flex;gap:12px;color:var(--muted);line-height:1.5}.num{flex:0 0 27px;height:27px;border-radius:9px;background:#a879ff25;color:#dfcaff;display:grid;place-items:center;font-weight:900}
+label{display:block;font-size:.88rem;color:#e8def5;font-weight:700;margin:14px 0 7px}input,select,textarea{width:100%;background:#0f0b18;border:1px solid #49345f;color:white;padding:13px 14px;border-radius:11px;font:inherit;outline:none}input:focus,select:focus,textarea:focus{border-color:var(--purple);box-shadow:0 0 0 3px #a879ff20}textarea{min-height:90px;resize:vertical}.form-panel .btn{width:100%;margin-top:17px}.fine{font-size:.78rem;margin:12px 0 0}
+.faq{max-width:760px;margin:auto;display:grid;gap:10px}.faq details{background:var(--panel);border:1px solid var(--line);padding:17px 19px;border-radius:13px}.faq summary{cursor:pointer;font-weight:800}.faq p{color:var(--muted);line-height:1.6;margin-bottom:0}
+footer{border-top:1px solid #ffffff14;padding:28px 0;color:var(--muted);font-size:.88rem}.foot{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+@media(max-width:760px){.navlinks{display:none}.hero{grid-template-columns:1fr;padding-top:52px}.visual{min-height:270px}.chess{width:190px;height:190px}.cards{grid-template-columns:1fr}.order-grid{grid-template-columns:1fr}.hero h1{letter-spacing:-2px}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+  <a class="brand" href="#"><b>NSP</b> JOKI</a>
+  <nav class="navlinks"><a href="#layanan">Layanan</a><a href="#harga">Daftar Harga</a><a href="#cara">Cara Pesan</a><a href="#pesan">Pesan</a><a href="#faq">FAQ</a></nav>
+  <a class="btn" href="#pesan">Pesan Sekarang</a>
+</div></header>
+<main>
+<div class="wrap hero">
+  <div>
+    <span class="eyebrow"><span class="dot"></span> MAGIC CHESS: GO GO SERVICE</span>
+    <h1>NAIK RANK,<br><span class="gradient">MAIN LEBIH TENANG.</span></h1>
+    <p>Selamat datang di NSP JOKI — layanan pendampingan dan coaching Magic Chess: Go Go. Pilih layanan, konsultasikan targetmu, lalu hubungi admin untuk informasi harga dan jadwal.</p>
+    <div class="actions"><a class="btn" href="#pesan">Mulai Pemesanan ↗</a><a class="btn secondary" href="#layanan">Lihat Layanan</a></div>
+  </div>
+  <div class="visual" aria-label="Ilustrasi papan catur fantasi">
+    <div class="chess"><div class="tile">♛</div><div class="tile">♞</div><div class="tile">♜</div><div class="tile">♟</div><div class="tile">♞</div><div class="tile">♚</div><div class="tile">♟</div><div class="tile">♜</div><div class="tile">♜</div><div class="tile">♟</div><div class="tile">♕</div><div class="tile">♞</div><div class="tile">♟</div><div class="tile">♜</div><div class="tile">♞</div><div class="tile">♛</div></div>
+    <div class="visual-label">NO SKILL NO PROBLEM</div>
+  </div>
+</div>
+
+<section id="layanan"><div class="wrap">
+  <div class="section-head"><h2>Layanan Kami</h2><p>Pilih bantuan yang sesuai dengan kebutuhan permainanmu.</p></div>
+  <div class="cards">
+    <article class="card"><div class="icon">♜</div><h3>Pendampingan Rank</h3><p>Temani perjalanan push rank dengan sesi bermain bersama dan strategi yang disepakati.</p></article>
+    <article class="card"><div class="icon">♟</div><h3>Coaching Strategi</h3><p>Belajar menyusun sinergi, memilih commander, mengatur ekonomi, dan mengambil keputusan.</p></article>
+    <article class="card"><div class="icon">✦</div><h3>Mabar / Party</h3><p>Atur sesi bermain bersama sesuai jadwal dan ketersediaan pemain.</p></article>
+  </div>
+  <div class="price-note"><strong>Harga layanan:</strong> konsultasikan melalui admin. Harga dan jadwal dikonfirmasi sebelum pesanan disetujui.</div>
+</div></section>
+
+
+<section id="harga"><div class="wrap">
+  <div class="section-head"><h2>Daftar Harga Joki Rank</h2><p>Harga dihitung berdasarkan jumlah bintang yang ingin dinaikkan.</p></div>
+  <div class="cards">
+    <article class="card"><h3>Warrior – Elite</h3><div class="gradient" style="font-size:1.8rem;font-weight:900">Rp1.000</div><p>Per bintang</p></article>
+    <article class="card"><h3>Master</h3><div class="gradient" style="font-size:1.8rem;font-weight:900">Rp1.500</div><p>Per bintang</p></article>
+    <article class="card"><h3>Grandmaster</h3><div class="gradient" style="font-size:1.8rem;font-weight:900">Rp2.000</div><p>Per bintang</p></article>
+    <article class="card"><h3>Epic</h3><div class="gradient" style="font-size:1.8rem;font-weight:900">Rp2.500</div><p>Per bintang</p></article>
+    <article class="card"><h3>Legend</h3><div class="gradient" style="font-size:1.8rem;font-weight:900">Rp3.000</div><p>Per bintang</p></article>
+    <article class="card"><h3>Mythic</h3><div class="gradient" style="font-size:1.8rem;font-weight:900">Rp4.000</div><p>Per bintang</p></article>
+  </div>
+  <div class="price-note"><strong>Contoh perhitungan:</strong> 10 bintang di rank Epic × Rp2.500 = <strong>Rp25.000</strong>.</div>
+  <div class="form-panel" style="max-width:620px;margin:20px auto 0">
+    <h3>Kalkulator Harga</h3>
+    <label for="calcRank">Pilih rank</label>
+    <select id="calcRank">
+      <option value="1000">Warrior – Elite · Rp1.000/bintang</option>
+      <option value="1500">Master · Rp1.500/bintang</option>
+      <option value="2000">Grandmaster · Rp2.000/bintang</option>
+      <option value="2500" selected>Epic · Rp2.500/bintang</option>
+      <option value="3000">Legend · Rp3.000/bintang</option>
+      <option value="4000">Mythic · Rp4.000/bintang</option>
+    </select>
+    <label for="calcStars">Jumlah bintang</label>
+    <input id="calcStars" type="number" min="1" step="1" value="10" placeholder="Masukkan jumlah bintang">
+    <div class="price-note" aria-live="polite">Estimasi total: <strong id="calcTotal">Rp25.000</strong></div>
+  </div>
+</div></section>
+
+<section id="cara"><div class="wrap">
+  <div class="section-head"><h2>Cara Pemesanan</h2><p>Proses singkat dan jelas sebelum sesi dimulai.</p></div>
+  <div class="cards">
+    <article class="card"><div class="icon">01</div><h3>Pilih layanan</h3><p>Tentukan pendampingan rank, coaching, atau mabar.</p></article>
+    <article class="card"><div class="icon">02</div><h3>Kirim detail</h3><p>Isi formulir dengan nama panggilan, target, dan jadwal yang diinginkan.</p></article>
+    <article class="card"><div class="icon">03</div><h3>Konfirmasi admin</h3><p>Admin akan mengonfirmasi ketersediaan, biaya, dan ketentuan sebelum sesi.</p></article>
+  </div>
+</div></section>
+
+<section id="pesan"><div class="wrap">
+  <div class="section-head"><h2>Form Pemesanan</h2><p>Isi formulir berikut untuk membuat pesan WhatsApp ke admin.</p></div>
+  <div class="order-grid">
+    <aside class="info-panel"><h3>NSP JOKI MCGG</h3><p>NO SKILL NO PROBLEM</p>
+      <ul class="steps">
+        <li><span class="num">✓</span><span>Harga dikonfirmasi terlebih dahulu.</span></li>
+        <li><span class="num">✓</span><span>Jadwal disesuaikan dengan ketersediaan.</span></li>
+        <li><span class="num">✓</span><span>Jangan kirim password, kode OTP, atau informasi login akun.</span></li>
+      </ul>
+      <p class="fine">Gunakan layanan pendampingan/coaching yang tidak membutuhkan akses akun pribadi.</p>
+    </aside>
+    <form class="form-panel" id="orderForm">
+      <h3>Detail Pesanan</h3>
+      <label for="nama">Nama / nickname</label><input id="nama" name="nama" placeholder="Contoh: NSP Player" required>
+      <label for="rank">Rank saat ini</label><input id="rank" name="rank" placeholder="Contoh: Epic / Legend / Mythic">
+      <label for="rankTujuan">Rank yang diinginkan</label><input id="rankTujuan" name="rankTujuan" placeholder="Contoh: Mythic" required>
+      <label for="jumlahBintang">Jumlah bintang yang ingin dinaikkan</label><input id="jumlahBintang" name="jumlahBintang" type="number" min="1" step="1" placeholder="Contoh: 10" required>
+      <label for="target">Target atau kebutuhan</label><input id="target" name="target" placeholder="Contoh: ingin belajar komposisi sinergi">
+      <label for="catatan">Catatan tambahan (opsional)</label><textarea id="catatan" name="catatan" placeholder="Tulis detail lain yang perlu diketahui admin..."></textarea>
+      <button class="btn" type="submit">Kirim Pesanan via WhatsApp ↗</button>
+      <p class="fine">Tombol akan membuka WhatsApp dengan ringkasan pesanan. Nomor admin perlu diatur pada kode website.</p>
+    </form>
+  </div>
+</div></section>
+
+<section id="faq"><div class="wrap">
+  <div class="section-head"><h2>Pertanyaan Umum</h2><p>Informasi sebelum melakukan pemesanan.</p></div>
+  <div class="faq">
+    <details><summary>Apakah harga langsung tampil?</summary><p>Belum. Hubungi admin untuk mendapatkan harga terbaru sesuai layanan, target, dan jadwal.</p></details>
+    <details><summary>Apakah harus memberikan password akun?</summary><p>Tidak. Website ini dirancang untuk pendampingan, coaching, dan mabar tanpa meminta password atau kode OTP.</p></details>
+    <details><summary>Bagaimana jika jadwal tidak tersedia?</summary><p>Admin dapat membantu mengusulkan jadwal lain sebelum pesanan disepakati.</p></details>
+  </div>
+</div></section>
+</main>
+<footer><div class="wrap foot"><span><strong>NSP JOKI</strong> · Magic Chess: Go Go</span><span>NO SKILL NO PROBLEM · © <span id="year"></span></span></div></footer>
+<script>
+/* GANTI nomor di bawah dengan nomor WhatsApp admin.
+   Format: kode negara + nomor, tanpa tanda +, spasi, atau strip. */
+const ADMIN_WA = "6285784199772";
+const rupiah = n => new Intl.NumberFormat("id-ID", {style:"currency", currency:"IDR", maximumFractionDigits:0}).format(n);
+document.getElementById("year").textContent = new Date().getFullYear();
+
+const calcRank = document.getElementById("calcRank");
+const calcStars = document.getElementById("calcStars");
+const calcTotal = document.getElementById("calcTotal");
+function updateCalculator() {
+  const stars = Math.max(0, Math.floor(Number(calcStars.value) || 0));
+  calcTotal.textContent = rupiah(stars * Number(calcRank.value));
+}
+calcRank.addEventListener("change", updateCalculator);
+calcStars.addEventListener("input", updateCalculator);
+
+document.getElementById("orderForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  const data = new FormData(this);
+  const stars = Math.max(0, Math.floor(Number(data.get("jumlahBintang")) || 0));
+  const message = [
+    "Halo admin NSP JOKI, saya ingin memesan joki rank Magic Chess: Go Go.",
+    "",
+    "Nama: " + (data.get("nama") || "-"),
+    "Rank saat ini: " + (data.get("rank") || "-"),
+    "Rank yang diinginkan: " + (data.get("rankTujuan") || "-"),
+    "Jumlah bintang: " + stars,
+    "Target/kebutuhan: " + (data.get("target") || "-"),
+    "Catatan: " + (data.get("catatan") || "-"),
+    "",
+    "Mohon konfirmasi harga akhir dan ketersediaannya. Terima kasih."
+  ].join("\n");
+  if (ADMIN_WA.includes("X")) {
+    alert("Nomor WhatsApp admin belum diatur.");
+    return;
+  }
+  window.open("https://wa.me/" + ADMIN_WA + "?text=" + encodeURIComponent(message), "_blank", "noopener");
+});
+</script>
+</body>
+</html>
